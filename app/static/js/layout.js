@@ -42,10 +42,13 @@ $(function() {
                     }
                     else if(response.output.nodes_visited[0] === 'node_2_1517114042728') {
                         phone = "";
-                        for(var i = 0; i < response.entities; i++) {
+                        console.log(response.entities);
+                        for(var i = 0; i < response.entities.length; i++) {
+                            console.log(response.entities.length);
                             if(response.entities[i].value.charAt(0) === '-')
                                 response.entities[i].value = response.entities[i].value.splice(0, 1);
                             phone += response.entities[i].value;
+                            console.log("gmm");
                         }
                     }
                     var data = response.output.text;
@@ -88,7 +91,7 @@ function text() {
     if(stock !== undefined && phone !== undefined && price !== undefined) {
         $.ajax({
             type: 'POST',
-            url: '/api/v1.0/send',
+            url: '/api/v1.0/text',
             data: JSON.stringify({ stock: stock, price: price, phone: phone }),
             dataType: 'json',
             contentType: "application/json",
