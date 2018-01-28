@@ -2,6 +2,7 @@ from flask import request, abort, session, jsonify
 from app import app
 from watson_developer_cloud import ConversationV1
 import json
+from app.routes.astuce import *
 
 conversation = []
 context = []
@@ -32,5 +33,17 @@ def message():
         context=context[session['id']]
     )
     context[session['id']] = response['context']
+
+    for e in response['entities']:
+        if e['entity'] == "stock":
+            data = getStockPrices(e['value'])
+            response['output']['text'].append(e['value'])
+            for d in data:
+                response['output']['text'].append(d + "$")
+
+    if response['intents'][0]['intent'] == "topgainers" :
+        data = getTop3Gainers()
+        for d in data:
+            response['output']['text'].append(d)
 
     return json.dumps(response)

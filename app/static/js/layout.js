@@ -31,17 +31,19 @@ $(function() {
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response);
-                    var data = response.output.text;
-                    for(var i = 0; i < data.length; i++) {
-                        var template = $('<div class="wrapper">' +
-                            '<div class="reply-message">' +
-                            '<span>Watson: <br/></span>' + data[i] +
-                            '</div>' +
-                            '</div>').hide();
 
-                        template.appendTo('#conversation').show("slide", {direction: 'left'});
-                        checkHeight();
+                    var data = response.output.text;
+                    var concat = "";
+                    for(var i = 0; i < data.length; i++) {
+                        concat += data[i] + "<br />";
                     }
+                    var template = $('<div class="wrapper">' +
+                    '<div class="reply-message">' +
+                    '<span>Watson: <br/></span>' + concat +
+                    '</div>' +
+                    '</div>').hide();
+                    template.appendTo('#conversation').show("slide", {direction: 'left'});
+                    checkHeight();
                 },
                 error: function (result) {
                     alert(result.responseText);
