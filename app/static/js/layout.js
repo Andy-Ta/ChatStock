@@ -16,7 +16,7 @@ $(function() {
         if(message !== '') {
             var template = $('<div class="user-wrapper">' +
                                 '<div class="user-message">' +
-                                    '<span>You: <br/></span>' + message +
+                                    '<b>You: <br/></b>' + message +
                                 '</div>' +
                            '</div>').hide();
 
@@ -35,7 +35,7 @@ $(function() {
                     for(var i = 0; i < data.length; i++) {
                         var template = $('<div class="wrapper">' +
                             '<div class="reply-message">' +
-                            '<span>Watson: <br/></span>' + data[i] +
+                            '<b>Watson: <br/></b>' + data[i] +
                             '</div>' +
                             '</div>').hide();
 
