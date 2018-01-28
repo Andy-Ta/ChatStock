@@ -59,13 +59,19 @@ def text():
     phone = request.get_json(force=True)['phone']
     stock = request.get_json(force=True)['stock']
 
+    print('gmm')
+    print(phone)
+    print(price)
+    print(stock)
+
     if phone[0] != "1":
         phone = "1" + phone
 
     client = Client(account_sid, auth_token)
 
-    response = client.api.account.messages.create(
+    client.api.account.messages.create(
         to="+" + phone,
         from_="+15146121818",
         body="Hello, your stock " + stock + " has reached " + price + ".")
-    return json.dumps(response)
+
+    return json.dumps({'id': 'I Guess It works'})
