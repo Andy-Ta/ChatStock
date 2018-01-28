@@ -45,7 +45,7 @@ def message():
             for d in data:
                 response['output']['text'].append(d + "$")
 
-    if response['intents'][0]['intent'] == "topgainers" :
+    if response['intents'][0]['intent'] == "topgainers":
         data = getTop3Gainers()
         for d in data:
             response['output']['text'].append(d)
@@ -73,5 +73,5 @@ def text():
         to="+" + phone,
         from_="+15146121818",
         body="Hello, your stock " + stock + " has reached " + price + ".")
-    return json.dumps({'id': 'I Guess It works'})
 
+    return json.dumps({'id': 'I Guess It works'})
