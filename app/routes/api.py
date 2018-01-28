@@ -45,7 +45,7 @@ def message():
             for d in data:
                 response['output']['text'].append(d + "$")
 
-    if response['intents'][0]['intent'] == "topgainers" :
+    if response['intents'][0]['intent'] == "topgainers":
         data = getTop3Gainers()
         for d in data:
             response['output']['text'].append(d)
@@ -67,5 +67,5 @@ def text():
     response = client.api.account.messages.create(
         to="+" + phone,
         from_="+15146121818",
-        body="Hello, your stock " + stock + " has reached " + price ".")
+        body="Hello, your stock " + stock + " has reached " + price + ".")
     return json.dumps(response)
