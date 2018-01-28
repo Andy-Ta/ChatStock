@@ -12,6 +12,7 @@ $(function() {
         },
         error: function (result) {
             alert(result.responseText);
+            location.reload();
         }
     });
 
@@ -26,7 +27,7 @@ $(function() {
 
             template.appendTo('#conversation').fadeIn();
             $('#message').val('');
-
+            $('#message').attr('disabled', true);
             $.ajax({
                 type: 'POST',
                 url: '/api/v1.0/send',
@@ -34,6 +35,7 @@ $(function() {
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (response) {
+                    console.log(response);
                     if(response.output.nodes_visited[0] === 'node_3_1517084237517') {
                         stock = response.entities[0].value;
                     }
@@ -42,13 +44,16 @@ $(function() {
                     }
                     else if(response.output.nodes_visited[0] === 'node_2_1517114042728') {
                         phone = "";
-                        console.log(response.entities);
+
                         for(var i = 0; i < response.entities.length; i++) {
-                            console.log(response.entities.length);
-                            if(response.entities[i].value.charAt(0) === '-')
-                                response.entities[i].value = response.entities[i].value.splice(0, 1);
-                            phone += response.entities[i].value;
-                            console.log("gmm");
+                            if(response.entities[i].entity === 'sys-number') {
+                                var newStr = response.entities[i].value.split('');
+                                if (newStr[0] === '-') {
+                                    newStr.splice(0, 1);
+                                    newStr = newStr.join('');
+                                }
+                                phone += newStr;
+                            }
                         }
                     }
                     var data = response.output.text;
@@ -62,11 +67,14 @@ $(function() {
                     '</div>' +
                     '</div>').hide();
                     template.appendTo('#conversation').show("slide", {direction: 'left'});
+                    $('#message').removeAttr('disabled');
+                    $('#message').focus();
                     checkHeight();
                     text();
                 },
                 error: function (result) {
                     alert(result.responseText);
+                    location.reload();
                 }
             });
         }
@@ -76,6 +84,17 @@ $(function() {
         if (e.which === 13) {
             $('#send').click();
         }
+    });
+
+    $('#main').find('h1 a').click(function(e) {
+        e.preventDefault();
+        alert("Example usages are: \n" +
+            "- What are stocks? \n" +
+            "- Who are the top gainers? \n" +
+            "- I want information about Apple and Microsoft \n" +
+            "- AAAP value\n" +
+            "- Notify me by text. \n" +
+            "- How do I open a trading account? \n");
     });
 });
 
@@ -89,6 +108,7 @@ function checkHeight() {
 
 function text() {
     if(stock !== undefined && phone !== undefined && price !== undefined) {
+        console.log(phone);
         $.ajax({
             type: 'POST',
             url: '/api/v1.0/text',
@@ -96,10 +116,14 @@ function text() {
             dataType: 'json',
             contentType: "application/json",
             success: function (response) {
+                stock = undefined;
+                phone = undefined;
+                price = undefined;
                 console.log(response);
             },
             error: function (result) {
                 alert(result.responseText);
+                location.reload();
             }
         });
     }

@@ -72,6 +72,6 @@ def text():
     client.api.account.messages.create(
         to="+" + phone,
         from_="+15146121818",
-        body="Hello, your stock " + stock + " has reached " + price + ".")
+        body="ChatStock: Your stock " + stock + " has reached " + price + "$.")
 
     return json.dumps({'id': 'I Guess It works'})
