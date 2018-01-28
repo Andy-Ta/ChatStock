@@ -1,11 +1,15 @@
 from flask import request, abort, session, jsonify
 from app import app
 from watson_developer_cloud import ConversationV1
+from twilio.rest import Client
 import json
 from app.routes.astuce import *
 
 conversation = []
 context = []
+
+account_sid = "ACb6cdefc1dec9c4ae8e825bb47ecede5c"
+auth_token = "0e27a5f88443ab7c7ef8a0d18ba64c08"
 
 
 @app.route('/api/v1.0/start', methods=['GET'])
@@ -46,4 +50,22 @@ def message():
         for d in data:
             response['output']['text'].append(d)
 
+    return json.dumps(response)
+
+
+@app.route('/api/v1.0/text', methods=['POST'])
+def text():
+    price = request.get_json(force=True)['price']
+    phone = request.get_json(force=True)['phone']
+    stock = request.get_json(force=True)['stock']
+
+    if phone[0] != "1":
+        phone = "1" + phone
+
+    client = Client(account_sid, auth_token)
+
+    response = client.api.account.messages.create(
+        to="+" + phone,
+        from_="+15146121818",
+        body="Hello, your stock " + stock + " has reached " + price ".")
     return json.dumps(response)
