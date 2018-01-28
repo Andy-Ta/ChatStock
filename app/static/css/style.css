@@ -1,0 +1,67 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#main {
+    background-size: cover;
+    background: #000 url(/static/img/skyline.jpg) no-repeat 50%;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#main h1 {
+    margin-top: 5%;
+}
+
+#main h1 span {
+    color: yellow;
+}
+
+#main #conversation {
+    flex: 1;
+    margin: 2% 10%;
+    overflow-y: scroll;
+    position:relative;
+    height: 300px;
+}
+
+#main #conversation .wrapper {
+    display: inline-block;
+    width: 100%;
+}
+
+#main #conversation .user-message {
+    float: right;
+    text-align: left;
+    padding: 2% 7% 2% 2%;
+    background: rgba(80, 80, 80, .2);
+    color: white;
+}
+
+#main #conversation .reply-message {
+    float: left;
+    text-align: left;
+    padding: 2% 7% 2% 2%;
+    background: rgba(80, 80, 80, .2);
+    color: white;
+}
+
+#main #conversation .user-message span:first-child {
+    min-width: 15%;
+}
+
+#main #conversation .user-message span.person {
+    text-align: right;
+    margin-left: 5%;
+}
+
+#main .chatbox {
+    bottom: 0;
+    margin: 2% 10%;
+}
