@@ -5,7 +5,7 @@ html, body {
 
 #main {
     background-size: cover;
-    background: #000 url(/static/img/skyline.gif) no-repeat 50%;
+    background: #000 url(/static/img/skyline.jpg) no-repeat 50%;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -20,14 +20,14 @@ html, body {
 }
 
 #main h1 span {
-    color: limegreen;
+    color: yellow;
 }
 
 #main h1 a {
     margin-right: 10%;
     margin-left: -10%;
     font-size: 50%;
-    color: limegreen;
+    color: yellow;
     float: right;
 }
 
