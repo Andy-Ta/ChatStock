@@ -1,3 +1,5 @@
+* linguist-vendored
 *.py linguist-vendored=false
-jquery-ui.min.js linguist-vendored=true
-semantic.min.js linguist-vendored=true
+*.html linguist-vendored=false
+*.css linguist-vendored=false
+layout.js linguist-vendored=false
