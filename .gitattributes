@@ -1,1 +1,5 @@
+* text=auto
+*.scss linguist-vendored
+vendor/* linguist-vendored
 app/static/js/vendor/* linguist-vendored
+CHANGELOG.md export-ignore
