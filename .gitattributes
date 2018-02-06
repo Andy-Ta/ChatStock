@@ -2,4 +2,3 @@
 *.py linguist-vendored=false
 *.html linguist-vendored=false
 style.css linguist-vendored=false
-layout.js linguist-vendored=false
