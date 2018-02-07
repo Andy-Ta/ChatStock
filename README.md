@@ -1,4 +1,5 @@
 # ChatStock
+https://devpost.com/software/chatstock-xezbrg
 ## Inspiration
 We were inspired to build this project because stocks can be complicated. Having several APIs at our disposal during the Hackathon, we decided to build the project involving many technologies.
 ## What it does
@@ -13,5 +14,3 @@ We're proud to have developed a stable product which uses newest modern technolo
 We learned how to use several APIs: IBM Watson, Astuce-Media and Twilio.
 ## What's next for ChatStock
 ChatStock can be grow into a bigger and more featured application using machine learning. There can be a feature to analyze trends and determine what is the best stock to invest into right now.
-
-https://devpost.com/software/chatstock-xezbrg
