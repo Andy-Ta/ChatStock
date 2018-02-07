@@ -8,7 +8,6 @@ $(function() {
         url: '/api/v1.0/start',
         contentType: "application/json",
         success: function (response) {
-            console.log(response)
         },
         error: function (result) {
             alert(result.responseText);
@@ -35,7 +34,6 @@ $(function() {
                 dataType: 'json',
                 contentType: "application/json",
                 success: function (response) {
-                    console.log(response);
                     if(response.output.nodes_visited[0] === 'node_3_1517084237517') {
                         stock = response.entities[0].value;
                     }
@@ -66,7 +64,7 @@ $(function() {
                     '<span>Watson: <br/></span>' + concat +
                     '</div>' +
                     '</div>').hide();
-                    template.appendTo('#conversation').show("slide", {direction: 'left'});
+                    template.appendTo('#conversation').show("slide");
                     $('#message').removeAttr('disabled');
                     $('#message').focus();
                     checkHeight();
@@ -108,7 +106,6 @@ function checkHeight() {
 
 function text() {
     if(stock !== undefined && phone !== undefined && price !== undefined) {
-        console.log(phone);
         $.ajax({
             type: 'POST',
             url: '/api/v1.0/text',
@@ -119,7 +116,6 @@ function text() {
                 stock = undefined;
                 phone = undefined;
                 price = undefined;
-                console.log(response);
             },
             error: function (result) {
                 alert(result.responseText);
