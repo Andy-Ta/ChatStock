@@ -28,7 +28,7 @@ def speech_from_mic(recognizer, microphone):
         response["transcription"] = recognizer.recognize_google(audio)
         elapsed_time = time.time() - start_time
         print("Time taken to recognize speech: " + str(elapsed_time))
-        r = requests.post("http://localhost:5000/translate", data={'message': response})
+        r = requests.post("http://localhost:5000/translate", json={'message': response})
     except sr.RequestError:
         response["success"] = False
         response["error"] = "API unavailable"
