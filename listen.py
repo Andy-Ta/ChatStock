@@ -1,5 +1,6 @@
 import time
 
+from googletrans import Translator
 import requests
 import speech_recognition as sr
 
@@ -28,7 +29,17 @@ def speech_from_mic(recognizer, microphone):
         response["transcription"] = recognizer.recognize_google(audio)
         elapsed_time = time.time() - start_time
         print("Time taken to recognize speech: " + str(elapsed_time))
-        r = requests.post("http://localhost:5000/translate", json={'message': response})
+
+        translator = Translator()
+        print("\nTranslation started...")
+        start_time = time.time()
+        print(response)
+        translated = translator.translate(response['transcription'], dest='fr').text
+        elapsed_time = time.time() - start_time
+        print("Time taken to translate: " + str(elapsed_time))
+        print(translated)
+
+        r = requests.post("http://localhost:5000/translate", json={'message': translated})
     except sr.RequestError:
         response["success"] = False
         response["error"] = "API unavailable"
@@ -41,7 +52,7 @@ def speech_from_mic(recognizer, microphone):
 if __name__ == "__main__":
     PROMPT_LIMIT = 99999
 
-    for i in range(PROMPT_LIMIT):
+    while True:
         recognizer = sr.Recognizer()
         microphone = sr.Microphone()
 
@@ -52,11 +63,6 @@ if __name__ == "__main__":
         print(instruction)
 
         word = speech_from_mic(recognizer, microphone)
-        if word["transcription"]:
-            break
-        if word["success"]:
-            break
-        print("I didn't catch that. What did you say?\n")
 
         if word["error"]:
             print("ERROR: {}".format(word["error"]))
