@@ -8,7 +8,7 @@ import time
 
 from flask import request
 from app import app
-import pyttsx as pyttsx
+import pyttsx3 as pyttsx
 from googletrans import Translator
 
 
