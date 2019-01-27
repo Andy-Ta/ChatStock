@@ -1,3 +1,5 @@
-watson-developer-cloud>=1.0,<2.0
-twilio
 Flask
+googletrans
+SpeechRecognition
+pyttsx3
+
